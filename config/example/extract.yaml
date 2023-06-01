@@ -1,0 +1,10 @@
+video_path: "/storage2/datasets/nkeetha/nea/nardo_ground_2022-11-21/videos/nardo_1/output0_1668797865_601393944.mp4"
+save_dir: "/storage2/datasets/nkeetha/nea/nardo_ground_2022-11-21/imgs/nardo_1/cam0"
+height: 2048
+width: 2448
+extract_specific_time: True
+start: 2 # seconds
+stop: 3 # seconds
+specific_frame_rate: False # If False, Code will extract video at Camera's default frame rate
+frame_rate: 5 # frames per second (Hz)
+rotate_img: False # Rotate extracted image by 180 degrees (use if Cameras are inverted)

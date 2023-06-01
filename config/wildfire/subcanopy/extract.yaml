@@ -1,0 +1,30 @@
+video_path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0_1677761985_629121776.mp4"
+save_dir: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0"
+height: 514
+width: 612
+extract_specific_time: True
+start: 2 # seconds
+stop: 3 # seconds
+specific_frame_rate: False # If False, Code will extract video at Camera's default frame rate
+frame_rate: 5 # frames per second (Hz)
+rotate_img: False # Rotate extracted image by 180 degrees (use if Cameras are inverted)
+
+# pipelines:
+#   [
+#     "camera_0",
+#     "camera_1",
+#     "camera_2",
+#     "camera_3",
+#     "thermal_left",
+#     "thermal_right",
+#   ]
+
+# camera_0:
+#   input:
+#     path: "~/bags/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0_1677761985_629121776.mp4"
+#     type: rosbag
+#     from: 100
+#     to: 500
+#   output:
+#     bag:
+#       path: 
