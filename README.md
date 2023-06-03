@@ -18,19 +18,19 @@ sudo chmod -R a+wrx ./scripts
 To pull:
 
 ```Shell
-./scripts/pull.sh
+./docker/pull.sh
 ```
 
 To run:
 
 ```Shell
-./scripts/run.sh
+./docker/run.sh
 ```
 
 To build:
 
 ```Shell
-./scripts/build.sh
+./docker/build.sh
 ```
 
 ## Conda

@@ -19,16 +19,17 @@ then
     chmod a+r $XAUTH
 fi
 
-docker run --name bagx \
+docker run --name BagX \
            --privileged \
            --gpus all \
            --cpus $AVAILABLE_CORES \
-           -e DISPLAY=$DISPLAY \
+           -e "DISPLAY=$DISPLAY" \
            -e "QT_X11_NO_MITSHM=1" \
-           -e XAUTHORITY=$XAUTH \
+           -e "XAUTHORITY=$XAUTH" \
            -v $XAUTH:$XAUTH \
-           -v "/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-           -v $(dirname "$0")/../:/root/bagx/ \
+           -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+           -v $(dirname "$0")/../:/root/BagX/ \
            -v "$DATA_PATH:/root/data" \
+           -h bagx \
            --rm \
            -itd tomnotch/bagx:1.0
