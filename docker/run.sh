@@ -20,16 +20,18 @@ then
 fi
 
 docker run --name BagX \
+           -h bagx \
            --privileged \
-           --gpus all \
            --cpus $AVAILABLE_CORES \
+           --gpus all \
+           --network host \
            -e "DISPLAY=$DISPLAY" \
            -e "QT_X11_NO_MITSHM=1" \
            -e "XAUTHORITY=$XAUTH" \
+           -e "ROS_MASTER_URI=http://localhost:11311" \
            -v $XAUTH:$XAUTH \
            -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
            -v $(dirname "$0")/../:/root/BagX/ \
            -v "$DATA_PATH:/root/data" \
-           -h bagx \
            --rm \
            -itd tomnotch/bagx:1.0

@@ -1,8 +1,0 @@
-# Images Directory
-images_dir: "/home/user/data/2022-11-29_project/images/"
-# Topic Name
-topic: "/turtlebot3/camera1/image_raw"
-# Output Bagfile Path
-output_bagfile_path: "/path/to/output/mybagfile.bag"
-# Number of frames to skip before adding the next frame to the bagfile
-skip_num: 0 # Default: 0

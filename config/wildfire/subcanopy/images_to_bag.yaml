@@ -1,8 +1,0 @@
-# Images Directory
-images_dir: "/home/tomnotch/bags/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0"
-# Topic Name
-topic: "/camera_0"
-# Output Bagfile Path
-output_bagfile_path: "/home/tomnotch/bags/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0.bag"
-# Number of frames to skip before adding the next frame to the bagfile
-skip_num: 0 # Default: 0
