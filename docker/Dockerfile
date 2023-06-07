@@ -1,3 +1,13 @@
+ # =============================================================================
+ # Created on Wed Jun 07 2023 16:09:02
+ # Author: Mukai (Tom Notch) Yu
+ # Email: mukaiy@andrew.cmu.edu
+ # Affiliation: Carnegie Mellon University, Robotics Institute, the AirLab
+ #
+ # Copyright Ⓒ 2023 Mukai (Tom Notch) Yu
+ # =============================================================================
+
+
 FROM nvcr.io/nvidia/deepstream:6.2-base
 ENV DEBIAN_FRONTEND=noninteractive
 
