@@ -69,5 +69,10 @@ RUN pip3 install --no-cache-dir \
     ipykernel \
     ipython
 
+# set up default workspace
+RUN mkdir -p /root/BagX
+
+WORKDIR /root/BagX
+
 # Entrypoint command
 ENTRYPOINT ["/bin/zsh"]
