@@ -5,7 +5,15 @@ from sensor_msgs.msg import Image
 
 
 class RosbagOutput:
+    """Rosbag output, outputs a rosbag file
+    """
     def __init__(self, name: str, output: dict):
+        """initialize the RosbagOutput class
+        
+        Args:
+            name (str): name of this pipeline in the yaml config
+            output (dict): output config dictionary
+        """
         self.name = name
         self.path = output['path']
         self.directory = output['directory']
@@ -17,6 +25,8 @@ class RosbagOutput:
         self.init_rosbag()
 
     def init_rosbag(self) -> None:
+        """initialize the rosbag file, set up the common part of the image message
+        """
         self.bag = rosbag.Bag(self.path, 'w')
         
         self.image_msg = Image()
@@ -26,6 +36,12 @@ class RosbagOutput:
         self.image_msg.header.seq = -1
 
     def callback(self, image, time_stamp: int) -> None:
+        """callback function of the RosbagOutput class, writes the image to the rosbag file
+
+        Args:
+            image (numpy.array): image in RGB encoding to be written
+            time_stamp (int): timestamp in nanoseconds
+        """
         self.image_msg.header.stamp = rospy.Time(secs=int(time_stamp // 1e9), nsecs=int(time_stamp % 1e9))
         self.image_msg.header.seq += 1
         self.image_msg.height = image.shape[0]
@@ -36,4 +52,6 @@ class RosbagOutput:
         self.bag.write(self.topic, self.image_msg, t=self.image_msg.header.stamp)
 
     def close(self) -> None:
+        """close function of the RosbagOutput class, closes the rosbag file to prevent reindex operation
+        """
         self.bag.close()

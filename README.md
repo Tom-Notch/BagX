@@ -21,10 +21,11 @@ To pull:
 ./docker/pull.sh
 ```
 
-To run:
+To run & attach:
 
 ```Shell
 ./docker/run.sh
+docker attach BagX
 ```
 
 To build:
@@ -63,3 +64,8 @@ conda activate BagX
 ## Contacts
 
 * Author: Mukai (Tom Notch) Yu: [mukaiy@andrew.cmu.edu](mailto:mukaiy@andrew.cmu.edu)
+
+## How to contribute
+
+* Add more input/output classes that can connect to more formats
+* append input/output types in [macros.py](./utils/macros.py) and initializations in [pipeline.py](./utils/pipeline.py)

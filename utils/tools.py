@@ -6,11 +6,28 @@ from .pipeline import Pipeline
 
 
 def load_config(cfg_path: str) -> dict:
+    """load the yaml config file
+
+    Args:
+        cfg_path (str): path to the yaml config file
+
+    Returns:
+        dict: config dictionary
+    """
     with open(cfg_path) as f:
         cfg: dict = yaml.safe_load(f)
     return cfg
 
-def print_dict(d: dict, indent: int = 0):
+def print_dict(d: dict, indent: int = 0) -> None:
+    """print a dictionary with indentation, uses recursion to print nested dictionaries
+    
+    Args:
+        d (dict): dictionary to be printed
+        indent (int, optional): indentation level. Defaults to 0.
+
+    Returns:
+        None
+    """
     for key, value in d.items():
         if isinstance(value, dict):
             print('  ' * indent + str(key) + ": ")
@@ -19,6 +36,15 @@ def print_dict(d: dict, indent: int = 0):
             print('  ' * indent + str(key) + ": " + str(value))
 
 def verify_file(path: str, type: str) -> bool:
+    """verify that the file/directory exists and is of the correct type
+
+    Args:
+        path (str): verified file/directory path
+        type (str): verified file/directory type
+
+    Returns:
+        bool: True if the file/directory exists and is of the correct type
+    """
     # verify the file/directory exists
     assert os.path.exists(path), f'file {path} does not exist'
 
@@ -34,7 +60,15 @@ def verify_file(path: str, type: str) -> bool:
     return True
 
 
-def trace_config(cfg: dict):
+def trace_config(cfg: dict) -> list:
+    """trace the config file, print the pipelines, and initializes the pipeline threads
+
+    Args:
+        cfg (dict): config dictionary from load_config()
+
+    Returns:
+        list: list of pipeline threads 
+    """
     pipelines = []
     # verify that the config file contains "pipelines"
     assert "pipelines" in cfg and cfg["pipelines"], "pipeline is not specified in config file"

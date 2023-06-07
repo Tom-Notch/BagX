@@ -8,6 +8,8 @@ import time
 
 
 class MP4Input:
+    """MP4 Input recorded by the image_sharing package: https://bitbucket.org/castacks/image_sharing/
+    """
     def __init__(self, name: str, input: dict, outputs: dict):
         """initialize the MP4Input class
 
@@ -31,7 +33,12 @@ class MP4Input:
 
         self.setup()
 
-    def setup(self):
+    def setup(self) -> None:
+        """setup the gstreamer pipeline
+
+        Returns:
+            None
+        """
         self.parse_start_time()
 
         self.bytes_per_pixel = 3 # since it's in RGB format
@@ -43,25 +50,35 @@ class MP4Input:
             self.gstreamer_pipeline_str += ",width=" + str(self.width)
         if self.height:
             self.gstreamer_pipeline_str += ",height=" + str(self.height)
-        self.gstreamer_pipeline_str += " ! progressreport update-freq=1 name=" + self.name + "_progress ! fakesink name=" + self.name
+        self.gstreamer_pipeline_str += " ! progressreport update-freq=1 name=" + self.name + "_progress ! fakesink name=" + self.name # Using fakesink since it's significantly faster than using appsink
         print(self.name + " MP4Input's gstreamer pipeline string: " + self.gstreamer_pipeline_str)
         self.gstreamer_pipeline = Gst.parse_launch(self.gstreamer_pipeline_str)
         self.gstreamer_pipeline.get_by_name(self.name).get_static_pad('sink').add_probe(Gst.PadProbeType.BUFFER, self.callback)
 
-    def parse_start_time(self):
+    def parse_start_time(self) -> None:
         """parse the absolute start time in nanoseconds from the file name
+
+        Returns:
+            None
         """
         match = re.search(r'(\d{10}_\d{9})(?=\.\w+$)', self.path)
         assert match is not None, f'{self.path} does not contain the proper timestamp sub-string.'
         time_str = match[1].split('_')
         self.absolute_start_time = int(time_str[0]) * int(1e9) + int(time_str[1])
 
-    def callback(self, pad, info):
-        buffer = info.get_buffer()
+    def callback(self, pad, info) -> Gst.PadProbeReturn:
+        """callback probe function for the sink pad of the fakesink of the gstreamer pipeline
 
-        image = self.get_image(buffer, pad.get_current_caps())
+        Args:
+            pad (Gst.Pad): the sink pad of the fakesink
+            info (Gst.PadProbeInfo): the probe info
 
-        self.current_relative_time = buffer.pts
+        Returns:
+            Gst.PadProbeReturn: Gst.PadProbeReturn.OK to continue the pipeline
+        """
+
+        # get the current frame and time stamp in nanoseconds
+        image, self.current_relative_time = self.get_frame(pad, info)
 
         # check if the current frame is within the start and end time
         if (self.start and self.current_relative_time * 1e-9 < self.start) or (self.end and self.current_relative_time * 1e-9 > self.end):
@@ -75,18 +92,37 @@ class MP4Input:
 
         return Gst.PadProbeReturn.OK
 
-    def get_image(self, buffer, caps):
+    def get_frame(self, pad, info) -> tuple:
+        """get the current frame and time stamp in nanoseconds
+        
+        Args:
+            pad (Gst.Pad): the sink pad of the sink
+            info (Gst.PadProbeInfo): the probe info
+
+        Returns:
+            tuple: (image, time_stamp): image in RGB format and time stamp in nanoseconds
+        """
+        buffer = info.get_buffer()
+        caps = pad.get_current_caps()
+
         caps_structure = caps.get_structure(0)
         height, width = caps_structure.get_value('height'), caps_structure.get_value('width')
 
         is_mapped, map_info = buffer.map(Gst.MapFlags.READ)
         if is_mapped:
             try:
-                return np.ndarray((height, width, self.bytes_per_pixel), dtype='uint8', buffer=map_info.data).copy() # extend array lifetime beyond subsequent unmap
+                image = np.ndarray((height, width, self.bytes_per_pixel), dtype='uint8', buffer=map_info.data).copy() # extend array lifetime beyond subsequent unmap
             finally:
                 buffer.unmap(map_info)
+        
+        return image, buffer.pts # using pts instead of dts since it's set in the mp4 file recorded using https://bitbucket.org/castacks/image_sharing/src/c5ab07622155793ff756020d1a8117a7d5036325/src/tools/to_gstreamer.cpp#lines-156
+    
+    def loop(self) -> None:
+        """Starts the gstreamer pipeline
 
-    def loop(self):
+        Returns:
+            None
+        """
         self.gstreamer_pipeline.set_state(Gst.State.PLAYING)
 
         try:
@@ -108,7 +144,7 @@ class MP4Input:
                 #     print(f"{self.name}\'s progress: {progress:.2f}%")
 
                 #! delay for 5 seconds since the progress query is blocking
-                time.sleep(1)
+                time.sleep(5)
         finally:
             self.gstreamer_pipeline.set_state(Gst.State.NULL)
 
