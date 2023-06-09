@@ -30,7 +30,7 @@ then
 fi
 
 docker run --name BagX \
-           -h bagx \
+           --hostname $(hostname) \
            --privileged \
            --cpus $AVAILABLE_CORES \
            --gpus all \
@@ -38,7 +38,6 @@ docker run --name BagX \
            -e "DISPLAY=$DISPLAY" \
            -e "QT_X11_NO_MITSHM=1" \
            -e "XAUTHORITY=$XAUTH" \
-           -e "ROS_MASTER_URI=http://localhost:11311" \
            -v $XAUTH:$XAUTH \
            -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
            -v $(dirname "$0")/../:/root/BagX/ \

@@ -22,8 +22,8 @@ RUN apt update && \
 RUN apt install apt-utils software-properties-common ncdu git less screen tmux tree net-tools vim nano emacs htop curl wget build-essential ffmpeg -y
 # RUN apt install nvtop -y #! quarantined for compatibility issues
 
-# copy oh-my-zsh powerlevel10k theme config
-COPY --from=bagx-config ./.p10k.zsh /root/
+# copy config files to home folder
+COPY --from=bagx-config ./. /root/
 
 # install zsh, Oh-My-Zsh, and plugins
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.5/zsh-in-docker.sh)" -- \
