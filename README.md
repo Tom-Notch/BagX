@@ -67,5 +67,16 @@ conda activate BagX
 
 ## How to contribute
 
+1. Setup your development environment
+
+    ```Shell
+    sudo ./scripts/setup.sh
+    ```
+
+    This will install `pre-commit` hooks and its dependencies locally, so that each time before you commit, the code will be formatted and linted automatically. **Remember to `git add .` after `git commit` failed since `pre-commit` will modify source code in-place**.
+
+1. Check the [GitHub webpage](https://github.com/Tom-Notch/BagX) after a few minutes to see if the CI passed. Passing CI will have a green check mark on the commit
+    * If not, please fix the errors and push again
+
 * Add more input/output classes that can connect to more formats
 * append input/output types in [macros.py](./utils/macros.py) and initializations in [pipeline.py](./utils/pipeline.py)
