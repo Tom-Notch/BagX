@@ -1,123 +1,113 @@
 %YAML 1.2
-
 ---
-pipelines: # comment out any pipeline you don't want to run
-  [
-    "camera_0",
-    "camera_1",
-    "camera_2",
-    "camera_3",
-    # "thermal_left",
-    # "thermal_right",
-  ]
+pipelines: [camera_0, camera_1, camera_2, camera_3]
 
 #! all the paths must be absolute path without ~, files must include full name with extension
 
 camera_0:
-  input:
-    path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0_1677761985_629121776.mp4"
-    type: "mp4"
-    width: 612 # optional resize
-    height: 514 # optional resize
-    # start: 1 # optional start time cutoff
-    # end: 5 # optional end time cutoff
-  output: # arbitrary number of output streams, tag names are arbitrary
-    # 1:
-    #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0/"
-    #   type: "directory"
-    2:
-      path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0.bag"
-      type: "rosbag"
-      topic: "/camera_0"
-      frame_id: "camera_0/optical_frame" # optional
+    input:
+        path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0_1677761985_629121776.mp4
+        type: mp4
+        width: 612 # optional resize
+        height: 514 # optional resize
+        # start: 1 # optional start time cutoff
+        # end: 5 # optional end time cutoff
+    output: # arbitrary number of output streams, tag names are arbitrary
+        # 1:
+        #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0/"
+        #   type: "directory"
+        2:
+            path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0.bag
+            type: rosbag
+            topic: /camera_0
+            frame_id: camera_0/optical_frame # optional
 
 camera_1:
-  input:
-    path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_1_1677761985_962133776.mp4"
-    type: "mp4"
-    width: 612 # optional resize
-    height: 514 # optional resize
-    # start: 1 # optional start time cutoff
-    # end: 5 # optional end time cutoff
-  output: # arbitrary number of output streams, tag names are arbitrary
-    # 1:
-    #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_1/"
-    #   type: "directory"
-    2:
-      path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_1.bag"
-      type: "rosbag"
-      topic: "/camera_1"
-      frame_id: "camera_1/optical_frame" # optional
+    input:
+        path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_1_1677761985_962133776.mp4
+        type: mp4
+        width: 612 # optional resize
+        height: 514 # optional resize
+        # start: 1 # optional start time cutoff
+        # end: 5 # optional end time cutoff
+    output: # arbitrary number of output streams, tag names are arbitrary
+        # 1:
+        #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_1/"
+        #   type: "directory"
+        2:
+            path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_1.bag
+            type: rosbag
+            topic: /camera_1
+            frame_id: camera_1/optical_frame # optional
 
 camera_2:
-  input:
-    path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_2_1677761986_311796776.mp4"
-    type: "mp4"
-    width: 612 # optional resize
-    height: 514 # optional resize
-    # start: 1 # optional start time cutoff
-    # end: 5 # optional end time cutoff
-  output: # arbitrary number of output streams, tag names are arbitrary
-    # 1:
-    #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_2/"
-    #   type: "directory"
-    2:
-      path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_2.bag"
-      type: "rosbag"
-      topic: "/camera_2"
-      frame_id: "camera_2/optical_frame" # optional
+    input:
+        path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_2_1677761986_311796776.mp4
+        type: mp4
+        width: 612 # optional resize
+        height: 514 # optional resize
+        # start: 1 # optional start time cutoff
+        # end: 5 # optional end time cutoff
+    output: # arbitrary number of output streams, tag names are arbitrary
+        # 1:
+        #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_2/"
+        #   type: "directory"
+        2:
+            path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_2.bag
+            type: rosbag
+            topic: /camera_2
+            frame_id: camera_2/optical_frame # optional
 
 camera_3:
-  input:
-    path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_3_1677761986_644808776.mp4"
-    type: "mp4"
-    width: 612 # optional resize
-    height: 514 # optional resize
-    # start: 1 # optional start time cutoff
-    # end: 5 # optional end time cutoff
-  output: # arbitrary number of output streams, tag names are arbitrary
-    # 1:
-    #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_3/"
-    #   type: "directory"
-    2:
-      path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_3.bag"
-      type: "rosbag"
-      topic: "/camera_3"
-      frame_id: "camera_3/optical_frame" # optional
+    input:
+        path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_3_1677761986_644808776.mp4
+        type: mp4
+        width: 612 # optional resize
+        height: 514 # optional resize
+        # start: 1 # optional start time cutoff
+        # end: 5 # optional end time cutoff
+    output: # arbitrary number of output streams, tag names are arbitrary
+        # 1:
+        #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_3/"
+        #   type: "directory"
+        2:
+            path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_3.bag
+            type: rosbag
+            topic: /camera_3
+            frame_id: camera_3/optical_frame # optional
 
 thermal_left:
-  input:
-    path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/thermal_left_1677761985_629121776.mp4"
-    type: "mp4"
-    start: 100
-    end: 500
-    # start: 1 # optional start time cutoff
-    # end: 5 # optional end time cutoff
-  output: # arbitrary number of output streams, tag names are arbitrary
-    # 1:
-    #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0/"
-    #   type: "directory"
-    2:
-      path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0.bag"
-      type: "rosbag"
-      topic: "/thermal_left/image"
-      frame_id: "thermal_left/optical_frame" # optional
+    input:
+        path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/thermal_left_1677761985_629121776.mp4
+        type: mp4
+        start: 100
+        end: 500
+        # start: 1 # optional start time cutoff
+        # end: 5 # optional end time cutoff
+    output: # arbitrary number of output streams, tag names are arbitrary
+        # 1:
+        #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0/"
+        #   type: "directory"
+        2:
+            path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0.bag
+            type: rosbag
+            topic: /thermal_left/image
+            frame_id: thermal_left/optical_frame # optional
 
 thermal_right:
-  input:
-    path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/thermal_right_1677761985_629121776.mp4"
-    type: "mp4"
-    start: 100
-    end: 500
-    # start: 1 # optional start time cutoff
-    # end: 5 # optional end time cutoff
-  output: # arbitrary number of output streams, tag names are arbitrary
-    # 1:
-    #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0/"
-    #   type: "directory"
-    2:
-      path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0.bag"
-      type: "rosbag"
-      topic: "/thermal_right/image"
-      frame_id: "thermal_right/optical_frame" # optional
-...
+    input:
+        path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/thermal_right_1677761985_629121776.mp4
+        type: mp4
+        start: 100
+        end: 500
+        # start: 1 # optional start time cutoff
+        # end: 5 # optional end time cutoff
+    output: # arbitrary number of output streams, tag names are arbitrary
+        # 1:
+        #   path: "/root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0/"
+        #   type: "directory"
+        2:
+            path: /root/data/wildfire/subcanopy/2023-04-27_FIRE-SGL-228/1/camera_0.bag
+            type: rosbag
+            topic: /thermal_right/image
+            frame_id: thermal_right/optical_frame # optional

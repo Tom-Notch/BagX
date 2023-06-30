@@ -1,0 +1,8 @@
+---
+user: vins-tptio
+group: vins-tptio
+paths:
+    - /home/vins-tptio/.oh-my-zsh
+    - /home/vins-tptio/.zshrc
+    - /home/vins-tptio/.bashrc
+    - /tmp

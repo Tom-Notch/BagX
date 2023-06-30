@@ -1,33 +1,33 @@
-#!/usr/bin/env python3
-
- # =============================================================================
- # Created on Wed Jun 07 2023 16:09:02
- # Author: Mukai (Tom Notch) Yu
- # Email: mukaiy@andrew.cmu.edu
- # Affiliation: Carnegie Mellon University, Robotics Institute, the AirLab
- #
- # Copyright Ⓒ 2023 Mukai (Tom Notch) Yu
- # =============================================================================
+# =============================================================================
+# Created on Wed Jun 07 2023 16:09:02
+# Author: Mukai (Tom Notch) Yu
+# Email: mukaiy@andrew.cmu.edu
+# Affiliation: Carnegie Mellon University, Robotics Institute, the AirLab
+#
+# Copyright Ⓒ 2023 Mukai (Tom Notch) Yu
+# =============================================================================
 
 import cv2
 import os
 
 
 class ImgDirOutput:
-    """Image Directory Output, outputs a directory of images with timestamps in nanoseconds as file names
-    """
+    """Image Directory Output, outputs a directory of images with timestamps in nanoseconds as file names"""
+
     def __init__(self, name: str, output: dict):
         """initialize the ImgDirOutput class
-        
+
         Args:
             name (str): name of this pipeline in the yaml config
             output (dict): output config dictionary
         """
         self.name = name
-        self.path = output['path']
-        self.directory = output['directory']
+        self.path = output["path"]
+        self.directory = output["directory"]
 
-        assert output['type'] == 'directory', f'{self.name}\'s output type {output["type"]} is inappropriate for ImgDirOutput Class.'
+        assert (
+            output["type"] == "directory"
+        ), f'{self.name}\'s output type {output["type"]} is inappropriate for ImgDirOutput Class.'
 
     def callback(self, image, time_stamp: int) -> None:
         """Callback function of the ImgDirOutput class, writes the image to the directory with the timestamp as the file name
@@ -40,7 +40,9 @@ class ImgDirOutput:
             None
         """
         output_image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-        cv2.imwrite(os.path.join(self.directory, str(time_stamp) + '.png'), output_image)
+        cv2.imwrite(
+            os.path.join(self.directory, str(time_stamp) + ".png"), output_image
+        )
 
     def close(self) -> None:
         """Close function of the ImgDirOutput class, does nothing
