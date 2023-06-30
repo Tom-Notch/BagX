@@ -29,6 +29,11 @@ repos:
           - id: hadolint
             files: \.(dockerfile)$
 
+    - repo: https://github.com/scop/pre-commit-shfmt
+      rev: v3.7.0-1
+      hooks:
+          - id: shfmt-docker
+
     - repo: https://github.com/shellcheck-py/shellcheck-py # shellcheck-py is a shellcheck wrapper.
       rev: v0.9.0.5
       hooks:

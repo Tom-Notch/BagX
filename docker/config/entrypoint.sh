@@ -3,11 +3,11 @@ set -e
 
 # Check if the HOST_UID and HOST_GID are specified
 if [ -n "${HOST_UID+x}" ] && [ -n "${HOST_GID+x}" ]; then
-    # Change 'myuser' UID and GID to match the host user's UID and GID
-    sudo usermod -u "$HOST_UID" "$(whoami)"
-    sudo groupmod -g "$HOST_GID" "$(whoami)"
-    # Ensure ownership of home directory is reset to 'myuser' after UID and GID change
-    chown -R "$(whoami)":"$(whoami)" /home/"$(whoami)"
+	# Change 'myuser' UID and GID to match the host user's UID and GID
+	sudo usermod -u "$HOST_UID" "$(whoami)"
+	sudo groupmod -g "$HOST_GID" "$(whoami)"
+	# Ensure ownership of home directory is reset to 'myuser' after UID and GID change
+	chown -R "$(whoami)":"$(whoami)" /home/"$(whoami)"
 fi
 
 # Switch to 'myuser'
