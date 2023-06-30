@@ -18,20 +18,20 @@ sudo chmod -R a+wrx ./scripts
 To pull:
 
 ```Shell
-./docker/pull.sh
+./scripts/pull.sh
 ```
 
 To run & attach:
 
 ```Shell
-./docker/run.sh
+./scripts/run.sh
 docker attach BagX
 ```
 
 To build:
 
 ```Shell
-./docker/build.sh
+./scripts/build.sh
 ```
 
 ## Conda
@@ -47,7 +47,7 @@ conda activate BagX
 
 1. modify the [./docker/run.sh](./docker/run.sh) according to your data directory
 
-1. To run:
+1. To run (inside the docker container):
 
 ```Shell
 ./conversion.py -c < path to your config file >
