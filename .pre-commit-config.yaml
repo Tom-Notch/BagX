@@ -6,17 +6,17 @@
 exclude: (?x)^(.*thirdparty/.*)$
 
 repos:
-    - repo: https://github.com/sirosen/check-jsonschema
+    - repo: https://github.com/sirosen/check-jsonschema # check-jsonschema is a github actions and workflows verifier.
       rev: 0.23.2
       hooks:
           - id: check-github-actions
           - id: check-github-workflows
 
-    - repo: https://github.com/pre-commit/mirrors-prettier
+    - repo: https://github.com/pre-commit/mirrors-prettier # mirrors-prettier is a prettier wrapper to format json, html, css, etc.
       rev: v2.7.1
       hooks:
           - id: prettier
-            files: \.(js|jsx|tsx|css|less|html|json)$
+            files: (?i)\.(js|jsx|tsx|css|less|html|json)$
 
     - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt # pre-commit-hook-yamlfmt is a YAML formatter.
       rev: 0.2.3
@@ -27,12 +27,12 @@ repos:
       rev: v2.12.0
       hooks:
           - id: hadolint
-            files: \.(dockerfile)$
+            files: (?i)\.(dockerfile)$
 
-    - repo: https://github.com/scop/pre-commit-shfmt
+    - repo: https://github.com/scop/pre-commit-shfmt # pre-commit-shfmt formats shell scripts.
       rev: v3.7.0-1
       hooks:
-          - id: shfmt-docker
+          - id: shfmt
 
     - repo: https://github.com/shellcheck-py/shellcheck-py # shellcheck-py is a shellcheck wrapper.
       rev: v0.9.0.5
@@ -44,11 +44,13 @@ repos:
       rev: 23.3.0
       hooks:
           - id: black
+          - id: black-jupyter
 
     - repo: https://github.com/pre-commit/mirrors-clang-format # mirrors-clang-format is a clang-format wrapper.
       rev: v16.0.6
       hooks:
           - id: clang-format
+            files: (?i)\.(h|c|hpp|cpp|hxx|cxx|cc)$
 
     # - repo: https://github.com/pocc/pre-commit-hooks # pre-commit-hooks is a collection of additional pre-commit hooks. Using clang-tidy only for now.
     #   rev: v1.3.5
@@ -66,7 +68,7 @@ repos:
           - id: markdownlint-fix
             args: [--fix, --disable, MD013]
 
-    - repo: https://github.com/pre-commit/pre-commit-hooks
+    - repo: https://github.com/pre-commit/pre-commit-hooks # pre-commit-hooks is a collection of additional pre-commit hooks.
       rev: v4.4.0
       hooks:
           - id: requirements-txt-fixer # fixes requirements.txt and requirements-dev.txt.
