@@ -2,8 +2,9 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 
-# Don't run pre-commit on files under any third-party/
-exclude: (?x)^(.*thirdparty/.*)$
+# Don't run pre-commit on files under any thirdparty/, third_party/, third-party/, etc. sub-folders
+# But will run on directories like third/.../../party/, etc.
+exclude: (?i)^(.*third[^/]*party/.*|.*\.ts|.*\.trt)$
 
 repos:
     - repo: https://github.com/sirosen/check-jsonschema # check-jsonschema is a github actions and workflows verifier.
@@ -11,12 +12,6 @@ repos:
       hooks:
           - id: check-github-actions
           - id: check-github-workflows
-
-    - repo: https://github.com/pre-commit/mirrors-prettier # mirrors-prettier is a prettier wrapper to format json, html, css, etc.
-      rev: v2.7.1
-      hooks:
-          - id: prettier
-            files: (?i)\.(js|jsx|tsx|css|less|html|json)$
 
     - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt # pre-commit-hook-yamlfmt is a YAML formatter.
       rev: 0.2.3
@@ -46,11 +41,11 @@ repos:
           - id: black
           - id: black-jupyter
 
-    - repo: https://github.com/pre-commit/mirrors-clang-format # mirrors-clang-format is a clang-format wrapper.
+    - repo: https://github.com/pre-commit/mirrors-clang-format # mirrors-clang-format is a clang-format wrapper, it can format json
       rev: v16.0.6
       hooks:
           - id: clang-format
-            files: (?i)\.(h|c|hpp|cpp|hxx|cxx|cc)$
+            # files: (?i)\.(h|c|hpp|cpp|hxx|cxx|cc)$
 
     # - repo: https://github.com/pocc/pre-commit-hooks # pre-commit-hooks is a collection of additional pre-commit hooks. Using clang-tidy only for now.
     #   rev: v1.3.5
