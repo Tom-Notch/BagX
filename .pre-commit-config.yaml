@@ -17,12 +17,15 @@ repos:
       rev: 0.2.3
       hooks:
           - id: yamlfmt
+            exclude: (?i)(.*docker-compose.*)$ # by-pass docker-compose since the %YAML 1.2 will break it.
 
-    - repo: https://github.com/hadolint/hadolint # hadolint is a Dockerfile linter.
-      rev: v2.12.0
+    - repo: https://github.com/AleksaC/hadolint-py # hadolint is a Dockerfile linter.
+      rev: v2.12.0.2
       hooks:
           - id: hadolint
-            files: (?i)\.(dockerfile)$
+            args:
+                - -t
+                - error
 
     - repo: https://github.com/scop/pre-commit-shfmt # pre-commit-shfmt formats shell scripts.
       rev: v3.7.0-1
@@ -33,7 +36,9 @@ repos:
       rev: v0.9.0.5
       hooks:
           - id: shellcheck
-            args: [-e, SC1071, -e, SC1091]
+            args:
+                - -e
+                - SC1071,SC1091
 
     - repo: https://github.com/psf/black # The uncompromising Python code formatter.
       rev: 23.3.0
@@ -57,11 +62,19 @@ repos:
       hooks:
           - id: cmake-format
 
-    - repo: https://github.com/igorshubovych/markdownlint-cli # markdownlint-cli is a markdown linter.
-      rev: v0.35.0
+    - repo: https://github.com/executablebooks/mdformat # mdformat is a markdown formatter.
+      rev: 0.7.16
       hooks:
-          - id: markdownlint-fix
-            args: [--fix, --disable, MD013]
+          - id: mdformat
+
+    - repo: https://github.com/jackdewinter/pymarkdown # pymarkdown is a markdown linter.
+      rev: v0.9.11
+      hooks:
+          - id: pymarkdown
+            args:
+                - -d
+                - MD013,MD033
+                - scan
 
     - repo: https://github.com/pre-commit/pre-commit-hooks # pre-commit-hooks is a collection of additional pre-commit hooks.
       rev: v4.4.0
@@ -71,7 +84,9 @@ repos:
           - id: check-case-conflict # checks for files that would conflict in case-insensitive filesystem.
           - id: check-merge-conflict # checks for files that contain merge conflict strings.
           - id: check-yaml # checks yaml files for parseable syntax.
-            args: [--allow-multiple-documents, --unsafe]
+            args:
+                - --allow-multiple-documents
+                - --unsafe
           - id: check-executables-have-shebangs # ensures that (non-binary) executables have a shebang.
           - id: check-shebang-scripts-are-executable # ensures that (non-binary) files with a shebang are executable.
           - id: end-of-file-fixer # ensures that a file is either empty, or ends with one newline.
