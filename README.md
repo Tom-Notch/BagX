@@ -40,7 +40,7 @@ If you have [NVIDIA DeepStream](https://developer.nvidia.com/deepstream-sdk) and
 
 ```Shell
 conda env create -f environment.yml
-conda activate BagX
+conda activate bagx
 ```
 
 ## Usage
@@ -48,8 +48,12 @@ conda activate BagX
 1. modify the `DATASET_PATH` in [./scripts/variables.sh](./scripts/variables.sh) according to your data directory on your host machine
 
    - `DATASET_PATH` will be mounted to `~/data` inside the docker container
+   - Remember to run [./scripts/run.sh](./scripts/run.sh) again after modifying the `DATASET_PATH` to update the docker container mount points
 
 1. modify the config according to your needs, e.g., [./config/example/mp4_to_imgdir_rosbag.yaml](./config/example/mp4_to_imgdir_rosbag.yaml)
+
+   - Any invalid input file path will cause assertion failure and stop the program, so don't worry, it won't go crazy
+   - Remember to specify all the pipelines you want to run in the `pipeline` list, otherwise it won't run
 
 1. To run (inside the docker container):
 
