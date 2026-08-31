@@ -8,7 +8,7 @@ exclude: (?i)^(.*third[^/]*party/.*|.*\.ts|.*\.trt)$
 
 repos:
     - repo: https://github.com/sirosen/check-jsonschema # check-jsonschema is a github actions and workflows verifier.
-      rev: 0.23.2
+      rev: 0.38.0
       hooks:
           - id: check-github-actions
           - id: check-github-workflows
@@ -20,7 +20,7 @@ repos:
             exclude: (?i)(.*docker-compose.*)$ # by-pass docker-compose since the %YAML 1.2 will break it.
 
     - repo: https://github.com/AleksaC/hadolint-py # hadolint is a Dockerfile linter.
-      rev: v2.12.0.2
+      rev: v2.15.1
       hooks:
           - id: hadolint
             args:
@@ -28,26 +28,26 @@ repos:
                 - error
 
     - repo: https://github.com/scop/pre-commit-shfmt # pre-commit-shfmt formats shell scripts.
-      rev: v3.7.0-1
+      rev: v3.13.1-1
       hooks:
           - id: shfmt
 
     - repo: https://github.com/shellcheck-py/shellcheck-py # shellcheck-py is a shellcheck wrapper.
-      rev: v0.9.0.5
+      rev: v0.11.0.1-1
       hooks:
           - id: shellcheck
             args:
                 - -e
                 - SC1071,SC1091
 
-    - repo: https://github.com/psf/black # The uncompromising Python code formatter.
-      rev: 23.3.0
+    - repo: https://github.com/psf/black-pre-commit-mirror # The uncompromising Python code formatter.
+      rev: 26.5.1
       hooks:
           - id: black
           - id: black-jupyter
 
     - repo: https://github.com/pre-commit/mirrors-clang-format # mirrors-clang-format is a clang-format wrapper, it can format json
-      rev: v16.0.6
+      rev: v23.1.0
       hooks:
           - id: clang-format
             # files: (?i)\.(h|c|hpp|cpp|hxx|cxx|cc)$
@@ -63,12 +63,12 @@ repos:
           - id: cmake-format
 
     - repo: https://github.com/executablebooks/mdformat # mdformat is a markdown formatter.
-      rev: 0.7.16
+      rev: 1.0.0
       hooks:
           - id: mdformat
 
     - repo: https://github.com/jackdewinter/pymarkdown # pymarkdown is a markdown linter.
-      rev: v0.9.11
+      rev: v0.9.39
       hooks:
           - id: pymarkdown
             args:
@@ -77,7 +77,7 @@ repos:
                 - scan
 
     - repo: https://github.com/pre-commit/pre-commit-hooks # pre-commit-hooks is a collection of additional pre-commit hooks.
-      rev: v4.4.0
+      rev: v6.0.0
       hooks:
           - id: requirements-txt-fixer # fixes requirements.txt and requirements-dev.txt.
           - id: check-added-large-files # prevents giant files from being committed.
